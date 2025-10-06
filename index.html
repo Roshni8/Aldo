@@ -3,81 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aldo Heels - Special Collection</title>
+    <title>Congratulations RDG!</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf2 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
+            position: relative;
         }
         
-        .container {
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            max-width: 500px;
             text-align: center;
-            background: white;
-            padding: 60px 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 600px;
-            animation: slideIn 0.6s ease-out;
+            animation: cardPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
         
-        @keyframes slideIn {
-            from {
+        @keyframes cardPop {
+            0% {
                 opacity: 0;
-                transform: translateY(-50px);
+                transform: scale(0.8) translateY(20px);
             }
-            to {
+            100% {
                 opacity: 1;
-                transform: translateY(0);
+                transform: scale(1) translateY(0);
             }
+        }
+        
+        .photo-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 35px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #667eea;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+            animation: photoFloat 3s ease-in-out infinite;
+            position: relative;
+        }
+        
+        @keyframes photoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .photo-container::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            z-index: -1;
+            opacity: 0.6;
+            filter: blur(10px);
+        }
+        
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         h1 {
-            font-size: 3em;
-            color: #667eea;
-            margin: 0 0 20px 0;
-            animation: bounce 1s ease infinite;
+            font-size: 2.2em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+            animation: titleGlow 2s ease-in-out infinite;
         }
         
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @keyframes titleGlow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
         }
         
         .message {
-            font-size: 1.5em;
-            color: #333;
-            margin: 20px 0;
-            line-height: 1.6;
+            font-size: 1.2em;
+            color: #4a5568;
+            margin: 25px 0;
+            line-height: 1.7;
+            font-weight: 400;
         }
         
         .heart {
-            font-size: 4em;
-            color: #ff6b6b;
+            font-size: 2.5em;
             animation: heartbeat 1.5s ease infinite;
             display: inline-block;
             margin: 20px 0;
+            filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3));
         }
         
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.1); }
+            25% { transform: scale(1.15); }
             50% { transform: scale(1); }
         }
         
+        /* Subtle confetti particles */
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
-            background: #ff6b6b;
-            position: absolute;
-            animation: confetti-fall 3s linear infinite;
+            width: 8px;
+            height: 8px;
+            background: #667eea;
+            animation: confetti-fall 5s linear infinite;
+            z-index: 1;
+            opacity: 0.6;
         }
         
         @keyframes confetti-fall {
@@ -86,31 +136,84 @@
                 opacity: 0;
             }
         }
+        
+        /* Floating ducks */
+        .duck {
+            position: fixed;
+            font-size: 24px;
+            z-index: 1;
+            animation: duck-float 6s ease-in-out infinite;
+            opacity: 0.5;
+        }
+        
+        @keyframes duck-float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(-30px) translateX(-10px) rotate(-5deg);
+            }
+            75% {
+                transform: translateY(-15px) translateX(5px) rotate(3deg);
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>April Fools! 🎉</h1>
+    <div class="card">
+        <div class="photo-container">
+            <img src="IMG_9044.jpg" alt="Your Photo">
+        </div>
+        <h1>Congratulations RDG! 🎉</h1>
         <div class="heart">❤️</div>
         <div class="message">
-            You are lucky you have the best girlfriend in the world
+            You have the best girlfriend in the whole world
         </div>
     </div>
     
     <script>
-        // Create confetti effect
+        // Create subtle confetti particles
         function createConfetti() {
             const confetti = document.createElement('div');
             confetti.className = 'confetti';
             confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.animationDelay = Math.random() * 3 + 's';
-            confetti.style.background = ['#ff6b6b', '#667eea', '#764ba2', '#ffd93d'][Math.floor(Math.random() * 4)];
-            document.body.appendChild(confetti);
+            confetti.style.top = -20 + 'px';
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            confetti.style.animationDuration = (Math.random() * 2 + 4) + 's';
             
-            setTimeout(() => confetti.remove(), 3000);
+            const colors = ['#667eea', '#764ba2', '#9fb4e7', '#a8b5d8'];
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            if (Math.random() > 0.5) {
+                confetti.style.borderRadius = '50%';
+            }
+            
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 5000);
         }
         
+        // Create floating ducks
+        function createDuck() {
+            const duck = document.createElement('div');
+            duck.className = 'duck';
+            duck.innerHTML = '🦆';
+            
+            duck.style.left = Math.random() * 90 + 'vw';
+            duck.style.top = Math.random() * 80 + 'vh';
+            duck.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.body.appendChild(duck);
+        }
+        
+        // Generate effects
         setInterval(createConfetti, 200);
+        
+        for(let i = 0; i < 15; i++) {
+            setTimeout(createDuck, i * 400);
+        }
     </script>
 </body>
 </html>
